@@ -983,7 +983,6 @@ function renderSummary(rec,elapsed){
     <div class="card">
       <h3 style="font-size:18px;margin-bottom:3px;">${rec.label}</h3>
       <p style="color:var(--sub);font-size:13px;">${rec.date} &bull; ${m}m ${s}s${!rec.completed?' <span style="color:var(--danger);">(incomplete)</span>':''}</p>
-      <button class="btn btn-primary" onclick="goHome()" style="margin-top:10px;">Back to home</button>
     </div>
     ${rec.exercises.map(e=>`<div class="card">
       <h4 style="font-size:14px;font-weight:600;margin-bottom:8px;">${e.name}</h4>
@@ -992,6 +991,7 @@ function renderSummary(rec,elapsed){
       </table>${e.note?`<p style="font-size:12px;color:var(--sub);margin-top:5px;">${e.note}</p>`:''}</div>`).join('')}
     <div class="card"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;"><p style="font-size:14px;font-weight:600;">Workout note</p><button style="padding:4px 10px;border-radius:6px;font-size:12px;font-weight:500;border:1px solid var(--border);background:#fff;color:var(--text);font-family:Arial,sans-serif;cursor:pointer;" onclick="saveWorkoutNote(${rec.id})">Save note</button></div>
       <textarea id="summary-note" placeholder="How did it go?">${rec.workoutNote}</textarea></div>
+    <button class="btn btn-primary" onclick="goHome()" style="margin-top:10px;">Back to home</button>
   </div>`;
 }
 function saveWorkoutNote(id){
@@ -1409,7 +1409,7 @@ function drawGraph(id,pts,xLabels,dots){
     if(pts.length<2){ctx.fillStyle=tc;ctx.font='13px Arial';ctx.textAlign='center';ctx.fillText('Need more data',W/2,H/2);return;}
     const pad={l:46,r:46,t:22,b:28},gW=W-pad.l-pad.r,gH=H-pad.t-pad.b;
     const ws=pts.map(p=>p.avgWeight),rs=pts.map(p=>p.avgReps);
-    const wMin=Math.min(...ws)*.97,wMax=Math.max(...ws)*1.03,rMin=Math.min(...rs)*.9,rMax=Math.max(...rs)*1.1;
+    const wMin=Math.min(...ws)*.97,wMax=Math.max(...ws)*1.03,rMin=Math.min(...rs)*.9,rMax=Math.max(...rs)*1.11;
     ctx.strokeStyle=gc2;ctx.lineWidth=.5;
     for(let i=0;i<=4;i++){
       const y=pad.t+gH*(i/4);ctx.beginPath();ctx.moveTo(pad.l,y);ctx.lineTo(pad.l+gW,y);ctx.stroke();
